@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signify Interview Reference</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap');
+
+        :root {
+            --bg: #0c0c0e;
+            --surface: #131317;
+            --surface2: #1a1a20;
+            --accent: #00ffa3;
+            --accent2: #ff6b35;
+            --text: #e8e8f0;
+            --muted: #555568;
+            --border: rgba(255, 255, 255, 0.07);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 14px;
+            line-height: 1.6
+        }
+
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 220px;
+            height: 100vh;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            z-index: 100;
+            padding: 16px 0
+        }
+
+        #sidebar h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            color: var(--accent);
+            letter-spacing: 2px;
+            padding: 0 16px 12px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 8px
+        }
+
+        .nav-section {
+            padding: 4px 0
+        }
+
+        .nav-section-title {
+            font-size: 10px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 8px 16px 4px
+        }
+
+        .nav-link {
+            display: block;
+            padding: 5px 16px;
+            color: #9999bb;
+            text-decoration: none;
+            font-size: 12px;
+            transition: all 0.15s;
+            border-left: 2px solid transparent
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+            border-left-color: var(--accent);
+            background: rgba(0, 255, 163, 0.04)
+        }
+
+        main {
+            margin-left: 220px;
+            padding: 32px 40px;
+            max-width: 960px
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            color: var(--accent);
+            letter-spacing: 3px;
+            margin-bottom: 4px
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px
+        }
+
+        .top20 {
+            background: linear-gradient(135deg, rgba(0, 255, 163, 0.08), rgba(255, 107, 53, 0.05));
+            border: 1px solid rgba(0, 255, 163, 0.25);
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-bottom: 36px
+        }
+
+        .top20 h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            color: var(--accent);
+            letter-spacing: 2px;
+            margin-bottom: 12px
+        }
+
+        .top20-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px
+        }
+
+        .top20-item {
+            background: rgba(0, 255, 163, 0.06);
+            border: 1px solid rgba(0, 255, 163, 0.12);
+            border-radius: 4px;
+            padding: 5px 8px;
+            font-size: 11px;
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--accent)
+        }
+
+        section {
+            margin-bottom: 44px
+        }
+
+        .section-header {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 30px;
+            letter-spacing: 2px;
+            color: var(--accent2);
+            border-bottom: 2px solid var(--accent2);
+            padding-bottom: 4px;
+            margin-bottom: 20px
+        }
+
+        .subsection {
+            margin-bottom: 28px
+        }
+
+        .subsection h3 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px
+        }
+
+        .qa-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            overflow: hidden
+        }
+
+        .qa-q {
+            background: var(--surface2);
+            padding: 9px 14px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #c8c8e8;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .qa-a {
+            padding: 10px 14px;
+            font-size: 13px;
+            color: #a8a8c8;
+            line-height: 1.7
+        }
+
+        .qa-a ul {
+            padding-left: 18px;
+            margin-top: 4px
+        }
+
+        .qa-a li {
+            margin-bottom: 3px
+        }
+
+        .qa-a strong {
+            color: var(--accent);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px
+        }
+
+        pre {
+            background: #0a0a10;
+            border: 1px solid rgba(0, 255, 163, 0.15);
+            border-radius: 6px;
+            padding: 14px 16px;
+            overflow-x: auto;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            line-height: 1.7;
+            color: #c8ffd8;
+            margin: 10px 0
+        }
+
+        .kw {
+            color: #ff6b35
+        }
+
+        .cm {
+            color: #556655
+        }
+
+        .str {
+            color: #ffd080
+        }
+
+        .num {
+            color: #80d0ff
+        }
+
+        .fn {
+            color: #80ffcc
+        }
+
+        .tag {
+            color: var(--accent);
+            font-size: 10px;
+            font-family: 'IBM Plex Mono', monospace;
+            background: rgba(0, 255, 163, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 8px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin: 10px 0
+        }
+
+        th {
+            background: var(--surface2);
+            color: var(--accent);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            padding: 8px 10px;
+            text-align: left;
+            border: 1px solid var(--border)
+        }
+
+        td {
+            padding: 7px 10px;
+            border: 1px solid var(--border);
+            color: #b0b0cc;
+            vertical-align: top
+        }
+
+        tr:nth-child(even) td {
+            background: rgba(255, 255, 255, 0.02)
+        }
+
+        .chip {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.12);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            color: var(--accent2);
+            border-radius: 3px;
+            padding: 1px 6px;
+            font-size: 10px;
+            font-family: 'IBM Plex Mono', monospace;
+            margin: 2px
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav id="sidebar">
+        <h2>SIGNIFY REF</h2>
+        <div class="nav-section">
+            <div class="nav-section-title">Top Priority</div>
+            <a class="nav-link" href="#top20">Top 20 Must-Know</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">C Programming</div>
+            <a class="nav-link" href="#c-basics">Basics & Storage</a>
+            <a class="nav-link" href="#c-pointers">Pointers</a>
+            <a class="nav-link" href="#c-memory">Memory</a>
+            <a class="nav-link" href="#c-structs">Structs & Unions</a>
+            <a class="nav-link" href="#c-strings">Strings</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Embedded C</div>
+            <a class="nav-link" href="#emb-keywords">Keywords</a>
+            <a class="nav-link" href="#emb-isr">ISR & Interrupts</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">C Coding</div>
+            <a class="nav-link" href="#code-arrays">Array Problems</a>
+            <a class="nav-link" href="#code-linked">Linked List</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">DSA</div>
+            <a class="nav-link" href="#dsa-stack">Stack & Queue</a>
+            <a class="nav-link" href="#dsa-trees">Trees & Graphs</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Java / OOP</div>
+            <a class="nav-link" href="#java-oop">OOP Concepts</a>
+            <a class="nav-link" href="#java-basics">JVM & Basics</a>
+            <a class="nav-link" href="#java-collections">Collections</a>
+            <a class="nav-link" href="#java-threads">Multithreading</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Embedded HW</div>
+            <a class="nav-link" href="#hw-mcu">MCU vs MPU</a>
+            <a class="nav-link" href="#hw-protocols">UART/SPI/I2C</a>
+            <a class="nav-link" href="#hw-adc">ADC/DAC</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">OS / Git</div>
+            <a class="nav-link" href="#os">OS Concepts</a>
+            <a class="nav-link" href="#git">Git</a>
+        </div>
+    </nav>
+
+    <main>
+        <h1>INTERVIEW REF</h1>
+        <div class="subtitle">Signify Embedded/Software Fresher · Complete Answer + Code Bank</div>
+
+        <!-- TOP 20 -->
+        <div class="top20" id="top20">
+            <h3>⚡ TOP 20 — MASTER THESE FIRST</h3>
+            <div class="top20-grid">
+                <div class="top20-item">01 Pointer</div>
+                <div class="top20-item">02 Ptr Arithmetic</div>
+                <div class="top20-item">03 malloc</div>
+                <div class="top20-item">04 calloc</div>
+                <div class="top20-item">05 Stack vs Heap</div>
+                <div class="top20-item">06 Memory Leak</div>
+                <div class="top20-item">07 Array vs LL</div>
+                <div class="top20-item">08 Reverse LL</div>
+                <div class="top20-item">09 Stack ADT</div>
+                <div class="top20-item">10 Queue ADT</div>
+                <div class="top20-item">11 OOP Concepts</div>
+                <div class="top20-item">12 Interface vs ABC</div>
+                <div class="top20-item">13 Process vs Thread</div>
+                <div class="top20-item">14 Semaphore</div>
+                <div class="top20-item">15 MCU vs MPU</div>
+                <div class="top20-item">16 Interrupt</div>
+                <div class="top20-item">17 UART</div>
+                <div class="top20-item">18 SPI</div>
+                <div class="top20-item">19 I2C</div>
+                <div class="top20-item">20 Project E2E</div>
+            </div>
+        </div>
+
+        <!-- ===== C BASICS ===== -->
+        <section id="c-basics">
+            <div class="section-header">C — BASICS & STORAGE CLASSES</div>
+
+            <div class="subsection">
+                <h3>Theory Q&A</h3>
+
+                <div class="qa-block">
+                    <div class="qa-q">C vs C++?</div>
+                    <div class="qa-a">C is procedural; C++ is multi-paradigm (procedural + OOP). C++ adds classes,
+                        inheritance, polymorphism, templates, STL, references, operator overloading. C is faster to
+                        compile, used in embedded/OS kernels. C++ is used in game engines, system software requiring
+                        OOP.</div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-q">Why "middle-level" language?</div>
+                    <div class="qa-a">Combines high-level constructs (loops, functions, data types) with low-level
+                        capabilities (pointer arithmetic, direct memory access, bit manipulation). Sits between assembly
+                        and high-level languages like Python.</div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-q">Storage classes? (4 types)</div>
+                    <div class="qa-a">
+                        <ul>
+                            <li><strong>auto</strong> — default for local vars; stack; lifetime = block scope</li>
+                            <li><strong>register</strong> — hint to store in CPU register; no address; fastest access
+                            </li>
+                            <li><strong>static</strong> — retains value across calls; local static = file scope; global
+                                static = file-only visibility</li>
+                            <li><strong>extern</strong> — declares var defined in another file; links across translation
+                                units</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-q">volatile keyword?</div>
+                    <div class="qa-a">Tells compiler: <em>do NOT optimize reads/writes to this variable</em>. Every
+                        access goes to actual memory, not a cached register. Critical for:<br>
+                        • Hardware registers (value changes by hardware, not software)<br>
+                        • ISR-shared variables<br>
+                        • Memory-mapped I/O</div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-q">const keyword?</div>
+                    <div class="qa-a"><strong>const int x = 5</strong> — value cannot change after init. <strong>const
+                            int *p</strong> — pointer to const int (can't modify *p). <strong>int * const p</strong> —
+                        const pointer (can't change p). <strong>const int * const p</strong> — both const.</div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-q">Local vs Global variables?</div>
+                    <div class="qa-a">
+                        <table>
+                            <tr>
+                                <th>Aspect</th>
+                                <th>Local</th>
+                                <th>Global</th>
+                            </tr>
+                            <tr>
+                                <td>Scope</td>
+                                <td>Within function/block</td>
+                                <td>Entire file / all files (extern)</td>
+                            </tr>
+                            <tr>
+                                <td>Storage</td>
+                                <td>Stack</td>
+                                <td>Data segment (.bss / .data)</td>
+                            </tr>
+                            <tr>
+                                <td>Lifetime</td>
+                                <td>Until block exits</td>
+                                <td>Program lifetime</td>
+                            </tr>
+                            <tr>
+                                <td>Default val</td>
+                                <td>Undefined (garbage)</td>
+                                <td>0</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-q">Static variable?</div>
+                    <div class="qa-a">Retains value between function calls. Initialized once. Stored in BSS/data
+                        segment, not stack.
+                        <pre><span class="kw">void</span> <span class="fn">counter</span>() {
+    <span class="kw">static int</span> count = <span class="num">0</span>;  <span class="cm">// initialized once</span>
+    count++;
+    printf(<span class="str">"%d\n"</span>, count);   <span class="cm">// prints 1, 2, 3... on each call</span>
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== POINTERS ===== -->
+        <section id="c-pointers">
+            <div class="section-header">C — POINTERS</div>
+
+            <div class="subsection">
+                <h3>Core Concepts</h3>
+
+                <div class="qa-block">
+                    <div class="qa-q">What is a pointer? Why use it?</div>
+                    <div class="qa-a">Variable that stores the <em>memory address</em> of another variable. Uses:
+                        dynamic memory allocation, passing by reference (avoid copy), arrays, function pointers,
+                        hardware register access.</div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-q">Explain: int a=10; int *p=&a; — all four: a, &a, p, *p</div>
+                    <div class="qa-a">
+                        <pre><span class="kw">int</span> a = <span class="num">10</span>;      <span class="cm">// a  → value = 10, stored at some address e.g. 0x100</span>
+<span class="kw">int</span> *p = &a;    <span class="cm">// &a → address of a = 0x100</span>
+                <span class="cm">// p  → pointer variable, holds 0x100</span>
+                <span class="cm">// *p → dereference p → value at 0x100 = 10</span>
+
+*p = <span class="num">20</span>;       <span class="cm">// changes a to 20 (same memory location)</span></pre>
+                    </div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-q">NULL pointer?</div>
+                    <div class="qa-a">Pointer initialized to <strong>0 / NULL / nullptr</strong>. Points to no valid
+                        memory. Always check before dereferencing. Dereferencing NULL → segfault.</div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-q">Dangling pointer?</div>
+                    <div class="qa-a">Pointer pointing to freed/deleted memory. Causes undefined behavior.
+                        <pre><span class="kw">int</span> *p = (<span class="kw">int</span>*)malloc(<span class="kw">sizeof</span>(<span class="kw">int</span>));
+free(p);
+<span class="cm">// p is now dangling — fix:</span>
+p = NULL;   <span class="cm">// always nullify after free</span></pre>
+                    </div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-q">Void pointer?</div>
+                    <div class="qa-a">Generic pointer, can hold address of any type. Cannot be dereferenced directly —
+                        must cast first. Used in malloc() return, generic data structures.
+                        <pre><span class="kw">void</span> *vp;
+<span class="kw">int</span> x = <span class="num">5</span>;
+vp = &x;
+printf(<span class="str">"%d"</span>, *(<span class="kw">int</span>*)vp);  <span class="cm">// cast required</span></pre>
+                    </div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-q">Pointer arithmetic?</div>
+                    <div class="qa-a">Incrementing pointer moves by <em>sizeof(type)</em> bytes, not 1 byte.
+                        <pre><span class="kw">int</span> arr[] = {<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>};
+<span class="kw">int</span> *p = arr;
+p++;        <span class="cm">// moves 4 bytes (sizeof int), points to arr[1] = 20</span>
+p + <span class="num">2</span>;      <span class="cm">// points to arr[3] — 8 bytes ahead</span>
+p2 - p1;    <span class="cm">// difference in elements, not bytes</span></pre>
+                    </div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-q">Double pointer?</div>
+                    <div class="qa-a">Pointer to a pointer. Used in dynamic 2D arrays, modifying a pointer inside a
+                        function.
+                        <pre><span class="kw">int</span> a = <span class="num">10</span>;
+<span class="kw">int</span>  *p  = &a;   <span class="cm">// p  holds address of a</span>
+<span class="kw">int</span> **pp = &p;   <span class="cm">// pp holds address of p</span>
+printf(<span class="str">"%d"</span>, **pp); <span class="cm">// 10</span></pre>
+                    </div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-q">Function pointer?</div>
+                    <div class="qa-a">Pointer that stores address of a function. Used in callbacks, dispatch tables.
+                        <pre><span class="kw">int</span> <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b) { <span class="kw">return</span> a + b; }
+
+<span class="kw">int</span> (*fp)(<span class="kw">int</span>, <span class="kw">int</span>) = &add;  <span class="cm">// declare & assign</span>
+printf(<span class="str">"%d"</span>, fp(<span class="num">3</span>, <span class="num">4</span>));      <span class="cm">// call → 7</span></pre>
+                    </div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-q">Pointer vs Array?</div>
+                    <div class="qa-a">
+                        <table>
+                            <tr>
+                                <th></th>
+                                <th>Array</th>
+                                <th>Pointer</th>
+                            </tr>
+                            <tr>
+                                <td>Size</td>
+                                <td>Fixed at compile time</td>
+                                <td>Can point anywhere</td>
+                            </tr>
+                            <tr>
+                                <td>sizeof</td>
+                                <td>Total array bytes</td>
+                                <td>Size of pointer (4/8 bytes)</td>
+                            </tr>
+                            <tr>
+                                <td>Reassign</td>
+                                <td>Cannot (arr is const ptr)</td>
+                                <td>Can change where it points</td>
+                            </tr>
+                            <tr>
+                                <td>Memory</td>
+                                <td>Contiguous allocation</td>
+                                <td>Just stores an address</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== MEMORY ===== -->
+        <section id="c-memory">
+            <div class="section-header">C — MEMORY MANAGEMENT</div>
+
+            <div class="qa-block">
+                <div class="qa-q">Stack vs Heap?</div>
+                <div class="qa-a">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Stack</th>
+                            <th>Heap</th>
+                        </tr>
+                        <tr>
+                            <td>Managed by</td>
+                            <td>Compiler (auto)</td>
+                            <td>Programmer (malloc/free)</td>
+                        </tr>
+                        <tr>
+                            <td>Size</td>
+                            <td>Limited (few MB)</td>
+                            <td>Large (limited by RAM)</td>
+                        </tr>
+                        <tr>
+                            <td>Speed</td>
+                            <td>Fast (LIFO push/pop)</td>
+                            <td>Slower (fragmentation)</td>
+                        </tr>
+                        <tr>
+                            <td>Lifetime</td>
+                            <td>Until scope ends</td>
+                            <td>Until explicitly freed</td>
+                        </tr>
+                        <tr>
+                            <td>Overflow</td>
+                            <td>Stack overflow</td>
+                            <td>Memory leak / OOM</td>
+                        </tr>
+                    </table>
+                    Local variables → stack. <strong>malloc/calloc</strong> → heap.
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">malloc vs calloc?</div>
+                <div class="qa-a">
+                    <pre><span class="kw">int</span> *p = (<span class="kw">int</span>*)malloc(<span class="num">5</span> * <span class="kw">sizeof</span>(<span class="kw">int</span>));
+<span class="cm">// Allocates 20 bytes — NOT zero-initialized (garbage values)</span>
+
+<span class="kw">int</span> *q = (<span class="kw">int</span>*)calloc(<span class="num">5</span>, <span class="kw">sizeof</span>(<span class="kw">int</span>));
+<span class="cm">// Allocates 20 bytes — zero-initialized (all 0s)
+// calloc takes 2 args: count, size_per_element</span></pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">realloc?</div>
+                <div class="qa-a">Resize previously allocated block. Preserves existing data. Returns new pointer (may
+                    move block).
+                    <pre><span class="kw">int</span> *p = (<span class="kw">int</span>*)malloc(<span class="num">5</span> * <span class="kw">sizeof</span>(<span class="kw">int</span>));
+p = (<span class="kw">int</span>*)realloc(p, <span class="num">10</span> * <span class="kw">sizeof</span>(<span class="kw">int</span>));  <span class="cm">// expand to 10 ints</span>
+<span class="cm">// old data intact; new 5 slots uninitialized</span></pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Memory leak? Segmentation fault?</div>
+                <div class="qa-a"><strong>Memory leak:</strong> heap memory allocated but never freed. Accumulates over
+                    time → program crash / system slowdown. Fix: every malloc needs a matching free.<br><br>
+                    <strong>Segfault:</strong> illegal memory access — dereferencing NULL/dangling pointer, accessing
+                    out-of-bounds array, writing to read-only memory. OS sends SIGSEGV signal.
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Explain line by line: int *ptr = malloc(sizeof(int));</div>
+                <div class="qa-a">
+                    <pre><span class="kw">int</span> *ptr = malloc(<span class="kw">sizeof</span>(<span class="kw">int</span>));
+<span class="cm">// sizeof(int)     → 4 bytes on most systems
+// malloc(4)       → requests 4 bytes from heap, returns void*
+// (int*)          → cast to int* (good practice in C++)
+// ptr             → pointer variable on stack, stores heap address</span>
+
+*ptr = <span class="num">42</span>;        <span class="cm">// write to heap memory</span>
+printf(<span class="str">"%d"</span>, *ptr); <span class="cm">// read from heap</span>
+free(ptr);         <span class="cm">// release heap block</span>
+ptr = NULL;        <span class="cm">// prevent dangling pointer</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== STRUCTS ===== -->
+        <section id="c-structs">
+            <div class="section-header">C — STRUCTS & UNIONS</div>
+
+            <div class="qa-block">
+                <div class="qa-q">struct vs union?</div>
+                <div class="qa-a">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>struct</th>
+                            <th>union</th>
+                        </tr>
+                        <tr>
+                            <td>Memory</td>
+                            <td>Sum of all member sizes + padding</td>
+                            <td>Size of largest member only</td>
+                        </tr>
+                        <tr>
+                            <td>Access</td>
+                            <td>All members simultaneously</td>
+                            <td>Only one member at a time (shared memory)</td>
+                        </tr>
+                        <tr>
+                            <td>Use case</td>
+                            <td>Group related data (person: name+age+id)</td>
+                            <td>Type-punning, variant types, memory overlay</td>
+                        </tr>
+                    </table>
+                    <pre><span class="kw">union</span> U { <span class="kw">int</span> i; <span class="kw">float</span> f; };  <span class="cm">// sizeof = 4, not 8</span>
+U u; u.i = <span class="num">10</span>; u.f = <span class="num">3.14</span>;     <span class="cm">// writing f corrupts i</span></pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Structure padding?</div>
+                <div class="qa-a">Compiler inserts padding bytes to align members to their natural alignment (int →
+                    4-byte boundary). Affects sizeof().
+                    <pre><span class="kw">struct</span> A { <span class="kw">char</span> c; <span class="kw">int</span> i; };   <span class="cm">// sizeof = 8 (3 bytes padding after c)</span>
+<span class="kw">struct</span> B { <span class="kw">int</span> i; <span class="kw">char</span> c; };   <span class="cm">// sizeof = 8 (3 bytes padding after c)</span>
+<span class="kw">struct</span> C { <span class="kw">char</span> a; <span class="kw">char</span> b; <span class="kw">int</span> i; }; <span class="cm">// sizeof = 8</span>
+<span class="cm">// Use __attribute__((packed)) to remove padding (may cause perf issues)</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== STRINGS ===== -->
+        <section id="c-strings">
+            <div class="section-header">C — STRINGS</div>
+
+            <div class="qa-block">
+                <div class="qa-q">char array vs string? How stored?</div>
+                <div class="qa-a">C strings are char arrays terminated by <strong>'\0'</strong> (null terminator).
+                    <code>"hello"</code> stores 6 bytes: h,e,l,l,o,\0. strlen returns 5 (excludes \0), sizeof includes
+                    \0.</div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">strcpy vs strncpy? strcmp vs strncmp?</div>
+                <div class="qa-a">
+                    <pre><span class="cm">// strcpy  — copies until \0; UNSAFE if dst too small → buffer overflow</span>
+strcpy(dst, src);
+
+<span class="cm">// strncpy — copies at most n bytes; SAFE but may not null-terminate</span>
+strncpy(dst, src, n); dst[n-<span class="num">1</span>] = <span class="str">'\0'</span>;  <span class="cm">// always null-terminate</span>
+
+<span class="cm">// strcmp  — compares full strings; returns 0 if equal, <0 or >0 otherwise</span>
+<span class="cm">// strncmp — compares first n chars only</span>
+strcmp(<span class="str">"abc"</span>, <span class="str">"abc"</span>)  <span class="cm">// → 0</span>
+strncmp(<span class="str">"abcd"</span>, <span class="str">"abXX"</span>, <span class="num">2</span>) <span class="cm">// → 0 (only first 2 chars)</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== EMBEDDED C ===== -->
+        <section id="emb-keywords">
+            <div class="section-header">EMBEDDED C</div>
+
+            <div class="qa-block">
+                <div class="qa-q">volatile in embedded — why critical?</div>
+                <div class="qa-a">
+                    <pre><span class="kw">volatile uint32_t</span> *GPIO_STATUS = (<span class="kw">volatile uint32_t</span>*)<span class="num">0x40020010</span>;
+<span class="cm">// Without volatile: compiler optimizes repeated reads → reads stale register cache
+// With volatile: every read fetches from actual hardware register</span>
+
+<span class="kw">volatile int</span> flag = <span class="num">0</span>;   <span class="cm">// shared with ISR</span>
+<span class="kw">void</span> ISR_Handler() { flag = <span class="num">1</span>; }
+<span class="kw">while</span>(!flag) {}          <span class="cm">// without volatile, compiler may optimize to infinite loop</span></pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Memory-mapped I/O?</div>
+                <div class="qa-a">Peripheral registers mapped to specific memory addresses. CPU uses normal load/store
+                    instructions to control hardware. No special I/O instructions needed (unlike port-mapped I/O).
+                    <pre><span class="cm">// STM32 example: toggle LED via GPIO register at 0x40020014</span>
+<span class="kw">#define</span> GPIOA_ODR  (*((<span class="kw">volatile uint32_t</span>*)<span class="num">0x40020014</span>))
+GPIOA_ODR |= (<span class="num">1</span> &lt;&lt; <span class="num">5</span>);   <span class="cm">// set pin 5</span>
+GPIOA_ODR &= ~(<span class="num">1</span> &lt;&lt; <span class="num">5</span>);  <span class="cm">// clear pin 5</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="emb-isr">
+            <div class="subsection">
+                <h3>ISR & Interrupts</h3>
+
+                <div class="qa-block">
+                    <div class="qa-q">What is an ISR? What happens inside an interrupt?</div>
+                    <div class="qa-a">
+                        <strong>ISR (Interrupt Service Routine):</strong> function called by hardware when an interrupt
+                        fires.<br><br>
+                        <strong>Sequence:</strong><br>
+                        1. Hardware detects interrupt signal<br>
+                        2. CPU finishes current instruction<br>
+                        3. Saves context (PC, registers, flags) onto stack<br>
+                        4. Jumps to ISR address via interrupt vector table<br>
+                        5. Executes ISR (keep SHORT — no blocking, no malloc)<br>
+                        6. Restores context, resumes normal execution<br><br>
+                        <strong>Interrupt latency</strong> = time from interrupt trigger to first ISR instruction.
+                        <pre><span class="kw">void</span> __attribute__((interrupt)) TIMER0_IRQHandler(<span class="kw">void</span>) {
+    <span class="kw">volatile</span> flag = <span class="num">1</span>;   <span class="cm">// set flag, main loop handles work</span>
+    TIMER0_SR &= ~<span class="num">0x01</span>;  <span class="cm">// clear interrupt flag (mandatory)</span>
+}</pre>
+                        <strong>Rules:</strong> no blocking calls, no printf, no malloc inside ISR. Use flags + main
+                        loop pattern.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CODING ===== -->
+        <section id="code-arrays">
+            <div class="section-header">C CODING — ARRAYS & STRINGS</div>
+
+            <div class="qa-block">
+                <div class="qa-q">Reverse Array</div>
+                <div class="qa-a">
+                    <pre><span class="kw">void</span> <span class="fn">reverseArray</span>(<span class="kw">int</span> arr[], <span class="kw">int</span> n) {
+    <span class="kw">int</span> l = <span class="num">0</span>, r = n - <span class="num">1</span>, tmp;
+    <span class="kw">while</span> (l &lt; r) {
+        tmp = arr[l]; arr[l] = arr[r]; arr[r] = tmp;
+        l++; r--;
+    }
+}
+<span class="cm">// {1,2,3,4,5} → {5,4,3,2,1}  O(n) time, O(1) space</span></pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Reverse String</div>
+                <div class="qa-a">
+                    <pre><span class="kw">void</span> <span class="fn">reverseStr</span>(<span class="kw">char</span> *s) {
+    <span class="kw">int</span> l = <span class="num">0</span>, r = strlen(s) - <span class="num">1</span>;
+    <span class="kw">while</span> (l &lt; r) { <span class="kw">char</span> t = s[l]; s[l++] = s[r]; s[r--] = t; }
+}
+<span class="cm">// "hello" → "olleh"</span></pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Count Vowels</div>
+                <div class="qa-a">
+                    <pre><span class="kw">int</span> <span class="fn">countVowels</span>(<span class="kw">char</span> *s) {
+    <span class="kw">int</span> count = <span class="num">0</span>;
+    <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; s[i]; i++)
+        <span class="kw">if</span> (strchr(<span class="str">"aeiouAEIOU"</span>, s[i])) count++;
+    <span class="kw">return</span> count;
+}
+<span class="cm">// "education" → 5</span></pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Largest & Second Largest</div>
+                <div class="qa-a">
+                    <pre><span class="kw">void</span> <span class="fn">findTop2</span>(<span class="kw">int</span> arr[], <span class="kw">int</span> n) {
+    <span class="kw">int</span> max1 = INT_MIN, max2 = INT_MIN;
+    <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; n; i++) {
+        <span class="kw">if</span> (arr[i] > max1) { max2 = max1; max1 = arr[i]; }
+        <span class="kw">else if</span> (arr[i] > max2 && arr[i] != max1) max2 = arr[i];
+    }
+    printf(<span class="str">"Max: %d, 2nd: %d\n"</span>, max1, max2);
+}
+<span class="cm">// {10,50,30,70} → Max:70, 2nd:50   O(n) single pass</span></pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Palindrome</div>
+                <div class="qa-a">
+                    <pre><span class="kw">int</span> <span class="fn">isPalindrome</span>(<span class="kw">char</span> *s) {
+    <span class="kw">int</span> l = <span class="num">0</span>, r = strlen(s) - <span class="num">1</span>;
+    <span class="kw">while</span> (l &lt; r) <span class="kw">if</span> (s[l++] != s[r--]) <span class="kw">return</span> <span class="num">0</span>;
+    <span class="kw">return</span> <span class="num">1</span>;
+}
+<span class="cm">// "madam" → 1 (palindrome), "hello" → 0</span></pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Prime Number</div>
+                <div class="qa-a">
+                    <pre><span class="kw">int</span> <span class="fn">isPrime</span>(<span class="kw">int</span> n) {
+    <span class="kw">if</span> (n &lt; <span class="num">2</span>) <span class="kw">return</span> <span class="num">0</span>;
+    <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">2</span>; i * i &lt;= n; i++)
+        <span class="kw">if</span> (n % i == <span class="num">0</span>) <span class="kw">return</span> <span class="num">0</span>;
+    <span class="kw">return</span> <span class="num">1</span>;
+}
+<span class="cm">// O(√n) — check divisors only up to √n</span></pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Factorial — iterative & recursive</div>
+                <div class="qa-a">
+                    <pre><span class="kw">long long</span> <span class="fn">factIter</span>(<span class="kw">int</span> n) {
+    <span class="kw">long long</span> r = <span class="num">1</span>;
+    <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">2</span>; i &lt;= n; i++) r *= i;
+    <span class="kw">return</span> r;
+}
+<span class="kw">long long</span> <span class="fn">factRec</span>(<span class="kw">int</span> n) {
+    <span class="kw">return</span> (n &lt;= <span class="num">1</span>) ? <span class="num">1</span> : n * factRec(n - <span class="num">1</span>);
+}
+<span class="cm">// iterative preferred in embedded (no stack overflow risk)</span></pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Fibonacci — iterative & recursive</div>
+                <div class="qa-a">
+                    <pre><span class="kw">void</span> <span class="fn">fibIter</span>(<span class="kw">int</span> n) {
+    <span class="kw">int</span> a = <span class="num">0</span>, b = <span class="num">1</span>, c;
+    <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">2</span>; i &lt; n; i++) { c = a + b; a = b; b = c; }
+}
+<span class="kw">int</span> <span class="fn">fibRec</span>(<span class="kw">int</span> n) {
+    <span class="kw">return</span> (n &lt;= <span class="num">1</span>) ? n : fibRec(n-<span class="num">1</span>) + fibRec(n-<span class="num">2</span>);
+}
+<span class="cm">// fibRec: O(2^n) — avoid for large n; use iterative O(n)</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== LINKED LIST ===== -->
+        <section id="code-linked">
+            <div class="section-header">LINKED LIST — ALL OPERATIONS</div>
+
+            <div class="qa-block">
+                <div class="qa-q">Node struct + Create + Traverse</div>
+                <div class="qa-a">
+                    <pre><span class="kw">struct</span> Node {
+    <span class="kw">int</span> data;
+    <span class="kw">struct</span> Node *next;
+};
+
+<span class="kw">struct</span> Node* <span class="fn">createNode</span>(<span class="kw">int</span> val) {
+    <span class="kw">struct</span> Node *n = malloc(<span class="kw">sizeof</span>(<span class="kw">struct</span> Node));
+    n->data = val; n->next = NULL;
+    <span class="kw">return</span> n;
+}
+
+<span class="kw">void</span> <span class="fn">traverse</span>(<span class="kw">struct</span> Node *head) {
+    <span class="kw">while</span> (head) { printf(<span class="str">"%d "</span>, head->data); head = head->next; }
+}</pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Insert at Beginning / End</div>
+                <div class="qa-a">
+                    <pre><span class="kw">struct</span> Node* <span class="fn">insertFront</span>(<span class="kw">struct</span> Node *head, <span class="kw">int</span> val) {
+    <span class="kw">struct</span> Node *n = createNode(val);
+    n->next = head;
+    <span class="kw">return</span> n;   <span class="cm">// new head</span>
+}
+
+<span class="kw">void</span> <span class="fn">insertEnd</span>(<span class="kw">struct</span> Node *head, <span class="kw">int</span> val) {
+    <span class="kw">struct</span> Node *n = createNode(val);
+    <span class="kw">if</span> (!head) { head = n; <span class="kw">return</span>; }
+    <span class="kw">struct</span> Node *cur = head;
+    <span class="kw">while</span> (cur->next) cur = cur->next;
+    cur->next = n;
+}</pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Reverse Linked List <span class="tag">MOST ASKED</span></div>
+                <div class="qa-a">
+                    <pre><span class="kw">struct</span> Node* <span class="fn">reverse</span>(<span class="kw">struct</span> Node *head) {
+    <span class="kw">struct</span> Node *prev = NULL, *cur = head, *nxt;
+    <span class="kw">while</span> (cur) {
+        nxt = cur->next;   <span class="cm">// save next</span>
+        cur->next = prev;  <span class="cm">// reverse link</span>
+        prev = cur;        <span class="cm">// advance prev</span>
+        cur = nxt;         <span class="cm">// advance cur</span>
+    }
+    <span class="kw">return</span> prev;           <span class="cm">// new head</span>
+}
+<span class="cm">// 1→2→3→4→5 becomes 5→4→3→2→1   O(n) time O(1) space</span></pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Find Middle Node (slow-fast pointer)</div>
+                <div class="qa-a">
+                    <pre><span class="kw">struct</span> Node* <span class="fn">findMiddle</span>(<span class="kw">struct</span> Node *head) {
+    <span class="kw">struct</span> Node *slow = head, *fast = head;
+    <span class="kw">while</span> (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    <span class="kw">return</span> slow;   <span class="cm">// when fast reaches end, slow is at middle</span>
+}
+<span class="cm">// 1→2→3→4→5 → middle = 3</span></pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Delete a Node</div>
+                <div class="qa-a">
+                    <pre><span class="kw">struct</span> Node* <span class="fn">deleteNode</span>(<span class="kw">struct</span> Node *head, <span class="kw">int</span> val) {
+    <span class="kw">if</span> (!head) <span class="kw">return</span> NULL;
+    <span class="kw">if</span> (head->data == val) {
+        <span class="kw">struct</span> Node *tmp = head->next; free(head); <span class="kw">return</span> tmp;
+    }
+    <span class="kw">struct</span> Node *cur = head;
+    <span class="kw">while</span> (cur->next && cur->next->data != val) cur = cur->next;
+    <span class="kw">if</span> (cur->next) {
+        <span class="kw">struct</span> Node *tmp = cur->next;
+        cur->next = tmp->next;
+        free(tmp);
+    }
+    <span class="kw">return</span> head;
+}</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== DSA ===== -->
+        <section id="dsa-stack">
+            <div class="section-header">DSA — STACK & QUEUE</div>
+
+            <div class="qa-block">
+                <div class="qa-q">Stack — concept + implementation</div>
+                <div class="qa-a">LIFO. Applications: function call stack, undo/redo, expression evaluation, DFS.
+                    <pre><span class="kw">#define</span> MAX <span class="num">100</span>
+<span class="kw">int</span> stk[MAX], top = -<span class="num">1</span>;
+
+<span class="kw">void</span> <span class="fn">push</span>(<span class="kw">int</span> x) { <span class="kw">if</span> (top &lt; MAX-<span class="num">1</span>) stk[++top] = x; }
+<span class="kw">int</span>  <span class="fn">pop</span>()        { <span class="kw">return</span> (top >= <span class="num">0</span>) ? stk[top--] : -<span class="num">1</span>; }
+<span class="kw">int</span>  <span class="fn">peek</span>()       { <span class="kw">return</span> (top >= <span class="num">0</span>) ? stk[top] : -<span class="num">1</span>; }
+<span class="kw">int</span>  <span class="fn">isEmpty</span>()    { <span class="kw">return</span> top == -<span class="num">1</span>; }</pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Queue — FIFO + Circular Queue</div>
+                <div class="qa-a">FIFO. Applications: BFS, task scheduling, print queue, message buffers.
+                    <pre><span class="kw">#define</span> MAX <span class="num">100</span>
+<span class="kw">int</span> q[MAX], front = <span class="num">0</span>, rear = <span class="num">0</span>;
+
+<span class="kw">void</span> <span class="fn">enqueue</span>(<span class="kw">int</span> x) { <span class="kw">if</span>((rear+<span class="num">1</span>)%MAX != front) { q[rear]=x; rear=(rear+<span class="num">1</span>)%MAX; } }
+<span class="kw">int</span>  <span class="fn">dequeue</span>()     { <span class="kw">if</span>(front!=rear){ <span class="kw">int</span> v=q[front]; front=(front+<span class="num">1</span>)%MAX; <span class="kw">return</span> v; } <span class="kw">return</span> -<span class="num">1</span>; }
+<span class="cm">// Circular: avoids wasted space; (rear+1)%MAX handles wrap-around</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="dsa-trees">
+            <div class="subsection">
+                <h3>Trees & Graphs</h3>
+
+                <div class="qa-block">
+                    <div class="qa-q">Binary Tree Traversals</div>
+                    <div class="qa-a">
+                        <pre><span class="kw">struct</span> BNode { <span class="kw">int</span> data; <span class="kw">struct</span> BNode *left, *right; };
+
+<span class="kw">void</span> <span class="fn">preorder</span> (<span class="kw">struct</span> BNode *r) { <span class="kw">if</span>(!r)<span class="kw">return</span>; printf(<span class="str">"%d "</span>,r->data); preorder(r->left);  preorder(r->right); }
+<span class="kw">void</span> <span class="fn">inorder</span>  (<span class="kw">struct</span> BNode *r) { <span class="kw">if</span>(!r)<span class="kw">return</span>; inorder(r->left);   printf(<span class="str">"%d "</span>,r->data); inorder(r->right); }
+<span class="kw">void</span> <span class="fn">postorder</span>(<span class="kw">struct</span> BNode *r) { <span class="kw">if</span>(!r)<span class="kw">return</span>; postorder(r->left); postorder(r->right); printf(<span class="str">"%d "</span>,r->data); }
+<span class="cm">// Inorder of BST → sorted ascending sequence</span></pre>
+                    </div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-q">BFS vs DFS (concept)</div>
+                    <div class="qa-a">
+                        <table>
+                            <tr>
+                                <th></th>
+                                <th>BFS</th>
+                                <th>DFS</th>
+                            </tr>
+                            <tr>
+                                <td>Structure</td>
+                                <td>Queue</td>
+                                <td>Stack / Recursion</td>
+                            </tr>
+                            <tr>
+                                <td>Order</td>
+                                <td>Level by level</td>
+                                <td>Go deep first</td>
+                            </tr>
+                            <tr>
+                                <td>Shortest path</td>
+                                <td>Yes (unweighted)</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td>Space</td>
+                                <td>O(w) — width</td>
+                                <td>O(h) — height</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== JAVA OOP ===== -->
+        <section id="java-oop">
+            <div class="section-header">JAVA — OOP CONCEPTS</div>
+
+            <div class="qa-block">
+                <div class="qa-q">4 Pillars of OOP</div>
+                <div class="qa-a">
+                    <table>
+                        <tr>
+                            <th>Pillar</th>
+                            <th>Definition</th>
+                            <th>Java Example</th>
+                        </tr>
+                        <tr>
+                            <td>Encapsulation</td>
+                            <td>Bundle data + methods; restrict direct access</td>
+                            <td>private fields + public getters/setters</td>
+                        </tr>
+                        <tr>
+                            <td>Inheritance</td>
+                            <td>Child class acquires parent properties</td>
+                            <td>class Dog extends Animal</td>
+                        </tr>
+                        <tr>
+                            <td>Polymorphism</td>
+                            <td>One interface, many implementations</td>
+                            <td>method overloading (compile) / overriding (runtime)</td>
+                        </tr>
+                        <tr>
+                            <td>Abstraction</td>
+                            <td>Hide implementation, show only interface</td>
+                            <td>abstract class / interface</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Interface vs Abstract Class <span class="tag">VERY COMMON</span></div>
+                <div class="qa-a">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Abstract Class</th>
+                            <th>Interface</th>
+                        </tr>
+                        <tr>
+                            <td>Methods</td>
+                            <td>Abstract + concrete</td>
+                            <td>Abstract (default/static allowed Java 8+)</td>
+                        </tr>
+                        <tr>
+                            <td>Fields</td>
+                            <td>Any (instance vars ok)</td>
+                            <td>Only public static final constants</td>
+                        </tr>
+                        <tr>
+                            <td>Inheritance</td>
+                            <td>Single (extends)</td>
+                            <td>Multiple (implements)</td>
+                        </tr>
+                        <tr>
+                            <td>Constructor</td>
+                            <td>Yes</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>Use when</td>
+                            <td>Shared base behavior + state</td>
+                            <td>Contract / capability definition</td>
+                        </tr>
+                    </table>
+                    <pre><span class="kw">abstract class</span> Shape { <span class="kw">abstract double</span> <span class="fn">area</span>(); <span class="kw">void</span> <span class="fn">draw</span>(){System.out.println(<span class="str">"Drawing"</span>);} }
+<span class="kw">interface</span> Resizable { <span class="kw">void</span> <span class="fn">resize</span>(<span class="kw">double</span> factor); }
+<span class="kw">class</span> Circle <span class="kw">extends</span> Shape <span class="kw">implements</span> Resizable { ... }</pre>
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Compile-time vs Runtime Polymorphism</div>
+                <div class="qa-a">
+                    <strong>Compile-time (overloading):</strong> same method name, different parameters. Resolved by
+                    compiler.
+                    <pre><span class="kw">int</span>    <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b)       { <span class="kw">return</span> a+b; }
+<span class="kw">double</span> <span class="fn">add</span>(<span class="kw">double</span> a, <span class="kw">double</span> b) { <span class="kw">return</span> a+b; }</pre>
+                    <strong>Runtime (overriding):</strong> child class redefines parent method. Resolved at runtime via
+                    vtable.
+                    <pre><span class="kw">class</span> Animal { <span class="kw">void</span> <span class="fn">sound</span>() { print(<span class="str">"..."</span>); } }
+<span class="kw">class</span> Dog <span class="kw">extends</span> Animal { @Override <span class="kw">void</span> <span class="fn">sound</span>() { print(<span class="str">"Woof"</span>); } }
+Animal a = <span class="kw">new</span> Dog(); a.sound(); <span class="cm">// "Woof" — runtime dispatch</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== JAVA BASICS ===== -->
+        <section id="java-basics">
+            <div class="section-header">JAVA — JVM, BASICS & EXCEPTIONS</div>
+
+            <div class="qa-block">
+                <div class="qa-q">JDK vs JRE vs JVM? Why platform independent?</div>
+                <div class="qa-a">
+                    <table>
+                        <tr>
+                            <th>Component</th>
+                            <th>Contains</th>
+                            <th>Purpose</th>
+                        </tr>
+                        <tr>
+                            <td>JDK</td>
+                            <td>JRE + compiler (javac) + tools</td>
+                            <td>Develop Java programs</td>
+                        </tr>
+                        <tr>
+                            <td>JRE</td>
+                            <td>JVM + class libraries</td>
+                            <td>Run Java programs</td>
+                        </tr>
+                        <tr>
+                            <td>JVM</td>
+                            <td>Interpreter + JIT + GC</td>
+                            <td>Execute bytecode</td>
+                        </tr>
+                    </table>
+                    <strong>Platform independence:</strong> javac compiles .java → .class (bytecode). JVM on each OS
+                    interprets bytecode. "Write once, run anywhere."
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Exception Handling — try-catch, throw vs throws, checked vs unchecked</div>
+                <div class="qa-a">
+                    <pre><span class="kw">void</span> <span class="fn">readFile</span>(String path) <span class="kw">throws</span> IOException {   <span class="cm">// declares exception</span>
+    <span class="kw">try</span> {
+        FileReader fr = <span class="kw">new</span> FileReader(path);
+    } <span class="kw">catch</span> (FileNotFoundException e) {
+        System.out.println(e.getMessage());
+        <span class="kw">throw new</span> IOException(<span class="str">"Wrapped"</span>, e);        <span class="cm">// re-throw</span>
+    } <span class="kw">finally</span> {
+        <span class="cm">// always runs — cleanup resources</span>
+    }
+}</pre>
+                    <strong>Checked:</strong> must handle at compile time (IOException, SQLException).
+                    <strong>Unchecked:</strong> runtime exceptions (NullPointerException,
+                    ArrayIndexOutOfBoundsException) — compiler doesn't force handling.
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== COLLECTIONS ===== -->
+        <section id="java-collections">
+            <div class="section-header">JAVA — COLLECTIONS</div>
+
+            <div class="qa-block">
+                <div class="qa-q">ArrayList vs LinkedList? HashMap? HashSet vs List?</div>
+                <div class="qa-a">
+                    <table>
+                        <tr>
+                            <th>Class</th>
+                            <th>Structure</th>
+                            <th>Get</th>
+                            <th>Add/Remove</th>
+                            <th>Use when</th>
+                        </tr>
+                        <tr>
+                            <td>ArrayList</td>
+                            <td>Dynamic array</td>
+                            <td>O(1)</td>
+                            <td>O(n) (shift)</td>
+                            <td>Frequent random access</td>
+                        </tr>
+                        <tr>
+                            <td>LinkedList</td>
+                            <td>Doubly linked</td>
+                            <td>O(n)</td>
+                            <td>O(1) at ends</td>
+                            <td>Frequent insert/delete</td>
+                        </tr>
+                        <tr>
+                            <td>HashMap</td>
+                            <td>Hash table</td>
+                            <td>O(1) avg</td>
+                            <td>O(1) avg</td>
+                            <td>Key-value lookup</td>
+                        </tr>
+                        <tr>
+                            <td>HashSet</td>
+                            <td>HashMap-backed</td>
+                            <td>O(1)</td>
+                            <td>O(1)</td>
+                            <td>Unique elements, no order</td>
+                        </tr>
+                    </table>
+                    <strong>List:</strong> ordered, allows duplicates. <strong>Set:</strong> unordered, no duplicates.
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== MULTITHREADING ===== -->
+        <section id="java-threads">
+            <div class="section-header">JAVA — MULTITHREADING</div>
+
+            <div class="qa-block">
+                <div class="qa-q">Thread vs Process? Synchronization? Race Condition?</div>
+                <div class="qa-a">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Process</th>
+                            <th>Thread</th>
+                        </tr>
+                        <tr>
+                            <td>Memory</td>
+                            <td>Separate address space</td>
+                            <td>Shared heap within process</td>
+                        </tr>
+                        <tr>
+                            <td>Switch cost</td>
+                            <td>High</td>
+                            <td>Low</td>
+                        </tr>
+                        <tr>
+                            <td>Communication</td>
+                            <td>IPC (pipes, sockets)</td>
+                            <td>Shared memory (fast)</td>
+                        </tr>
+                    </table>
+                    <strong>Race condition:</strong> two threads read-modify-write shared data concurrently →
+                    inconsistent result.<br>
+                    <strong>Synchronization:</strong> <code>synchronized</code> keyword ensures only one thread executes
+                    a block at a time.
+                    <pre><span class="kw">synchronized void</span> <span class="fn">increment</span>() { count++; }  <span class="cm">// only one thread at a time</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== EMBEDDED HW ===== -->
+        <section id="hw-mcu">
+            <div class="section-header">EMBEDDED — MCU vs MPU</div>
+
+            <div class="qa-block">
+                <div class="qa-q">Microcontroller vs Microprocessor <span class="tag">PREPARE PERFECTLY</span></div>
+                <div class="qa-a">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Microcontroller (MCU)</th>
+                            <th>Microprocessor (MPU)</th>
+                        </tr>
+                        <tr>
+                            <td>Integration</td>
+                            <td>CPU + RAM + Flash + I/O on one chip</td>
+                            <td>CPU only; external RAM/ROM/peripherals</td>
+                        </tr>
+                        <tr>
+                            <td>Examples</td>
+                            <td>STM32, Arduino, PIC, 8051</td>
+                            <td>Intel i7, ARM Cortex-A, RPi CPU</td>
+                        </tr>
+                        <tr>
+                            <td>OS</td>
+                            <td>Bare-metal or RTOS</td>
+                            <td>Full OS (Linux, Windows)</td>
+                        </tr>
+                        <tr>
+                            <td>Power</td>
+                            <td>Low (mW)</td>
+                            <td>High (W)</td>
+                        </tr>
+                        <tr>
+                            <td>Cost</td>
+                            <td>Cheap ($1–$10)</td>
+                            <td>Expensive ($50+)</td>
+                        </tr>
+                        <tr>
+                            <td>Use case</td>
+                            <td>IoT, appliances, automotive, Signify bulbs</td>
+                            <td>Servers, PCs, smartphones</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="hw-protocols">
+            <div class="section-header">EMBEDDED — UART / SPI / I2C</div>
+
+            <div class="qa-block">
+                <div class="qa-q">UART — Full form, TX, RX, Baud Rate</div>
+                <div class="qa-a">
+                    <strong>Universal Asynchronous Receiver Transmitter</strong><br>
+                    <table>
+                        <tr>
+                            <th>Signal</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>TX</td>
+                            <td>Transmit — send data out</td>
+                        </tr>
+                        <tr>
+                            <td>RX</td>
+                            <td>Receive — receive data in</td>
+                        </tr>
+                        <tr>
+                            <td>GND</td>
+                            <td>Common ground</td>
+                        </tr>
+                    </table>
+                    <strong>Asynchronous:</strong> no clock line — both sides agree on baud rate (e.g., 9600, 115200
+                    bps). Start bit + data (5-8 bits) + optional parity + stop bit(s). Simple, 2-wire, point-to-point
+                    only.
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">SPI — MOSI, MISO, Clock, Slave Select</div>
+                <div class="qa-a">
+                    <strong>Serial Peripheral Interface</strong> — synchronous, full-duplex, master-slave
+                    <table>
+                        <tr>
+                            <th>Line</th>
+                            <th>Full form</th>
+                            <th>Direction</th>
+                        </tr>
+                        <tr>
+                            <td>MOSI</td>
+                            <td>Master Out Slave In</td>
+                            <td>Master → Slave</td>
+                        </tr>
+                        <tr>
+                            <td>MISO</td>
+                            <td>Master In Slave Out</td>
+                            <td>Slave → Master</td>
+                        </tr>
+                        <tr>
+                            <td>SCLK</td>
+                            <td>Serial Clock</td>
+                            <td>Master → Slave</td>
+                        </tr>
+                        <tr>
+                            <td>CS/SS</td>
+                            <td>Chip/Slave Select</td>
+                            <td>Master → Slave (active low)</td>
+                        </tr>
+                    </table>
+                    Fast (10s of MHz), 4 wires, separate CS per slave. Used for: flash memory, displays, ADC/DAC.
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">I2C — SDA, SCL, Why only 2 wires?</div>
+                <div class="qa-a">
+                    <strong>Inter-Integrated Circuit</strong> — synchronous, half-duplex, multi-master multi-slave
+                    <table>
+                        <tr>
+                            <th>Line</th>
+                            <th>Full form</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>SDA</td>
+                            <td>Serial Data</td>
+                            <td>Bidirectional data (open-drain + pull-up)</td>
+                        </tr>
+                        <tr>
+                            <td>SCL</td>
+                            <td>Serial Clock</td>
+                            <td>Clock from master</td>
+                        </tr>
+                    </table>
+                    <strong>2 wires because:</strong> addressing scheme — each device has a unique 7-bit address sent on
+                    SDA. Master sends address → only matching slave responds. Supports 127 devices on same bus. Slower
+                    than SPI (100kHz/400kHz/1MHz). Used for: sensors, EEPROMs, RTCs.
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">UART vs SPI vs I2C — Quick Comparison</div>
+                <div class="qa-a">
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>UART</th>
+                            <th>SPI</th>
+                            <th>I2C</th>
+                        </tr>
+                        <tr>
+                            <td>Wires</td>
+                            <td>2 (TX,RX)</td>
+                            <td>4 (MOSI,MISO,CLK,CS)</td>
+                            <td>2 (SDA,SCL)</td>
+                        </tr>
+                        <tr>
+                            <td>Speed</td>
+                            <td>Up to ~5Mbps</td>
+                            <td>10s of MHz</td>
+                            <td>100k–3.4MHz</td>
+                        </tr>
+                        <tr>
+                            <td>Duplex</td>
+                            <td>Full</td>
+                            <td>Full</td>
+                            <td>Half</td>
+                        </tr>
+                        <tr>
+                            <td>Multi-slave</td>
+                            <td>No</td>
+                            <td>Yes (1 CS per slave)</td>
+                            <td>Yes (addressing)</td>
+                        </tr>
+                        <tr>
+                            <td>Sync</td>
+                            <td>Async</td>
+                            <td>Sync</td>
+                            <td>Sync</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="hw-adc">
+            <div class="subsection">
+                <h3>ADC / DAC</h3>
+                <div class="qa-block">
+                    <div class="qa-q">Why ADC? Why DAC?</div>
+                    <div class="qa-a">
+                        <strong>ADC (Analog-to-Digital Converter):</strong> Real world is analog (temperature, light,
+                        sound). MCU only processes digital. ADC converts analog voltage → digital number. Example: NTC
+                        thermistor → ADC → temperature value.<br><br>
+                        <strong>DAC (Digital-to-Analog Converter):</strong> MCU output is digital. To drive speakers,
+                        motors, analog circuits → convert digital value back to analog voltage. Example: PWM/DAC → audio
+                        output, motor speed control.<br><br>
+                        <strong>Key specs:</strong> Resolution (bits — 12-bit ADC = 4096 steps), Sampling rate (Nyquist:
+                        fs &gt; 2 × fmax).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== OS ===== -->
+        <section id="os">
+            <div class="section-header">OS CONCEPTS</div>
+
+            <div class="qa-block">
+                <div class="qa-q">Deadlock?</div>
+                <div class="qa-a">4 conditions (Coffman): <strong>Mutual Exclusion</strong> (resource held exclusively)
+                    + <strong>Hold & Wait</strong> (holds one, waits for another) + <strong>No Preemption</strong>
+                    (can't force release) + <strong>Circular Wait</strong> (P1→R1→P2→R2→P1).<br>
+                    Prevention: break any one condition (e.g., impose ordering on locks).
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Semaphore vs Mutex?</div>
+                <div class="qa-a">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Mutex</th>
+                            <th>Semaphore</th>
+                        </tr>
+                        <tr>
+                            <td>Type</td>
+                            <td>Locking mechanism (binary)</td>
+                            <td>Signaling mechanism (counting)</td>
+                        </tr>
+                        <tr>
+                            <td>Value</td>
+                            <td>0 or 1 (locked/unlocked)</td>
+                            <td>0 to N</td>
+                        </tr>
+                        <tr>
+                            <td>Ownership</td>
+                            <td>Thread that locked must unlock</td>
+                            <td>Any thread can signal</td>
+                        </tr>
+                        <tr>
+                            <td>Use case</td>
+                            <td>Protect shared resource (critical section)</td>
+                            <td>Control access count / signal between threads</td>
+                        </tr>
+                    </table>
+                    <strong>Binary semaphore ≈ mutex</strong> but mutex has ownership; semaphore is for synchronization
+                    signaling.
+                </div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-q">Context Switching?</div>
+                <div class="qa-a">OS saves state (registers, PC, stack pointer) of current process → loads state of next
+                    process. Enables multitasking. Overhead: saving/restoring CPU state, cache flush. Triggered by:
+                    timer interrupt, system call, I/O wait.
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== GIT ===== -->
+        <section id="git">
+            <div class="section-header">GIT</div>
+
+            <div class="qa-block">
+                <div class="qa-q">Git essentials</div>
+                <div class="qa-a">
+                    <table>
+                        <tr>
+                            <th>Command</th>
+                            <th>What it does</th>
+                        </tr>
+                        <tr>
+                            <td>git init</td>
+                            <td>Create new repo</td>
+                        </tr>
+                        <tr>
+                            <td>git clone &lt;url&gt;</td>
+                            <td>Copy remote repo locally</td>
+                        </tr>
+                        <tr>
+                            <td>git add .</td>
+                            <td>Stage all changes</td>
+                        </tr>
+                        <tr>
+                            <td>git commit -m "msg"</td>
+                            <td>Save staged changes with message</td>
+                        </tr>
+                        <tr>
+                            <td>git push origin main</td>
+                            <td>Upload local commits to remote</td>
+                        </tr>
+                        <tr>
+                            <td>git pull</td>
+                            <td>Fetch + merge remote changes (= fetch + merge)</td>
+                        </tr>
+                        <tr>
+                            <td>git branch &lt;name&gt;</td>
+                            <td>Create branch</td>
+                        </tr>
+                        <tr>
+                            <td>git checkout -b &lt;name&gt;</td>
+                            <td>Create + switch to branch</td>
+                        </tr>
+                        <tr>
+                            <td>git merge &lt;branch&gt;</td>
+                            <td>Merge branch into current</td>
+                        </tr>
+                        <tr>
+                            <td>git status</td>
+                            <td>Show staged/unstaged changes</td>
+                        </tr>
+                        <tr>
+                            <td>git log --oneline</td>
+                            <td>Compact commit history</td>
+                        </tr>
+                    </table>
+                    <strong>Git</strong> = distributed VCS tool. <strong>GitHub</strong> = cloud hosting service for Git
+                    repos.
+                </div>
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>
